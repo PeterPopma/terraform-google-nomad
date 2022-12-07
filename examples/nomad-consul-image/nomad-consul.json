@@ -1,0 +1,68 @@
+{
+  "min_packer_version": "1.0.4",
+  "variables": {
+    "project_id": "graalvm-346908",
+    "zone": "europe-west1-b",
+    "nomad_version": "1.1.0",
+    "consul_module_version": "v0.4.0",
+    "consul_version": "1.13.2"
+  },
+  "builders": [{
+    "name": "ubuntu18-image",
+    "type": "googlecompute",
+    "image_name": "nomad-consul-ubuntu18-{{isotime \"2006-01-02-030405\"}}",
+    "image_family": "nomad-consul",
+    "project_id": "{{user `project_id`}}",
+    "source_image_family": "ubuntu-1804-lts",
+    "zone": "{{user `zone`}}",
+    "ssh_username": "ubuntu"
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "mkdir -p /tmp/terraform-google-nomad/modules",
+      "echo tmp directory created"
+    ]
+  },{
+    "type": "file",
+    "source": "{{template_dir}}/../../modules/",
+    "destination": "/tmp/terraform-google-nomad/modules",
+    "pause_before": "15s"
+  },{
+    "pause_before": "15s",
+    "type": "shell",
+    "inline": [
+      "cd /tmp/terraform-google-nomad/modules/install-nomad/",
+      "pwd",
+      "ls -ltr",
+      "chmod +x install-nomad.sh",
+      "ls -ltr",
+      "sudo ./install-nomad.sh --version {{user `nomad_version`}}"
+    ]
+  },{
+    "type": "shell",
+    "inline": [
+      "sudo apt-get install -y git"
+    ]
+  },{
+    "type": "shell",
+    "inline": [
+      "sudo mkdir -p /opt/gruntwork",
+      "git clone --branch v0.0.3 https://github.com/gruntwork-io/bash-commons.git /tmp/bash-commons",
+      "sudo cp -r /tmp/bash-commons/modules/bash-commons/src /opt/gruntwork/bash-commons"
+    ]
+  },{
+    "type": "shell",
+    "inline": [
+      "git clone --branch {{user `consul_module_version`}} https://github.com/hashicorp/terraform-google-consul.git /tmp/terraform-google-consul",
+      "/tmp/terraform-google-consul/modules/install-consul/install-consul --version {{user `consul_version`}}"
+    ]
+  },{
+    "type": "shell",
+    "inline": [
+      "cd /tmp/terraform-google-nomad/modules/install-docker/",
+      "chmod +x install-docker.sh",
+      "sudo ./install-docker.sh"
+    ]
+  }]
+}
