@@ -1,8 +1,8 @@
 {
   "min_packer_version": "1.0.4",
   "variables": {
-    "project_id": "graalvm-346908",
-    "zone": "europe-west1-b",
+    "project_id": "pi-calculator-371210",
+    "zone": "europe-west1-d",
     "nomad_version": "1.1.0",
     "consul_module_version": "v0.4.0",
     "consul_version": "1.13.2"

@@ -1,7 +1,7 @@
 job "autoscaler" {
   type = "service"
 
-  datacenters = ["europe-west1-c", "europe-west1-d"]
+  datacenters = ["europe-west1-b", "europe-west1-c"]
 
   group "autoscaler" {
     count = 1
