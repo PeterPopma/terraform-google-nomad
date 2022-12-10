@@ -32,7 +32,7 @@ variable "nomad_consul_server_cluster_name" {
 variable "nomad_consul_server_source_image" {
   description = "The Google Image used to launch each node in the Nomad/Consul Server cluster."
   type        = string
-  default = "nomad-consul-ubuntu18-2022-12-10-111911"
+  default = "nomad-consul-ubuntu22-2022-12-10-064713"
 }
 
 # Nomad Client cluster
@@ -46,7 +46,7 @@ variable "nomad_client_cluster_name" {
 variable "nomad_client_source_image" {
   description = "The Google Image used to launch each node in the Nomad client cluster."
   type        = string
-  default = "nomad-consul-ubuntu18-2022-12-10-111911"
+  default = "nomad-consul-ubuntu22-2022-12-10-064713"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

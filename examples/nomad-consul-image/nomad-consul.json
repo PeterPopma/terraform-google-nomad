@@ -3,17 +3,17 @@
   "variables": {
     "project_id": "pi-calculator-371210",
     "zone": "europe-west1-d",
-    "nomad_version": "1.1.0",
+    "nomad_version": "1.4.3",
     "consul_module_version": "v0.4.0",
-    "consul_version": "1.13.2"
+    "consul_version": "1.14.2"
   },
   "builders": [{
-    "name": "ubuntu18-image",
+    "name": "ubuntu22-image",
     "type": "googlecompute",
-    "image_name": "nomad-consul-ubuntu18-{{isotime \"2006-01-02-030405\"}}",
+    "image_name": "nomad-consul-ubuntu22-{{isotime \"2006-01-02-030405\"}}",
     "image_family": "nomad-consul",
     "project_id": "{{user `project_id`}}",
-    "source_image_family": "ubuntu-1804-lts",
+    "source_image_family": "ubuntu-2204-lts",
     "zone": "{{user `zone`}}",
     "ssh_username": "ubuntu"
   }],
