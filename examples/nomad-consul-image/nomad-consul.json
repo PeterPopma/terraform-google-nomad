@@ -1,7 +1,7 @@
 {
   "min_packer_version": "1.0.4",
   "variables": {
-    "project_id": "pi-calculator-371210",
+    "project_id": "nomad-demo-371509",
     "zone": "europe-west1-d",
     "nomad_version": "1.4.3",
     "consul_module_version": "v0.4.0",
